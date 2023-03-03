@@ -6,7 +6,7 @@ with open("dataset-extra1.json", 'r', encoding="utf-8") as f:
 pessoas = data['pessoas']
 id = 1
 for pessoa in pessoas:
-    pessoa['id'] = id
+    pessoa['id'] = "p" + str(id)
     id += 1
 
 with open("dataset-extra1-ID.json", "w") as file:
