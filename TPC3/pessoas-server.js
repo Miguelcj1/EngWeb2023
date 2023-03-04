@@ -71,6 +71,29 @@ http.createServer(function (req,res){
             res.end("<p>Erro: " + erro + "</p>")
         })
     }
+    else if(req.url == '/pessoas/sexo'){
+        axios.get('http://localhost:3000/pessoas')
+        .then(function(resp){
+            var pessoas = resp.data            
+            var pessoasSexo = {
+                'masculino': 0,
+                'feminino': 0,
+                'outro': 0
+            }
+            for(let i=0; i<pessoas.length; i++){
+                pessoasSexo[pessoas[i].sexo] += 1
+            }
+
+            res.writeHead(200,{'Content-Type': 'text/html; charset=utf-8'});
+            res.end(mypages.genSexosPage(pessoasSexo, d, `Distribuição por sexo`))
+        })
+        .catch(erro => {   // É UMA FUNÇÃO. A MESMA COISA DO QUE function(erro){}
+            console.log("Erro: " + erro)
+
+            res.writeHead(200,{'Content-Type': 'text/html; charset=utf-8'});
+            res.end("<p>Erro: " + erro + "</p>")
+        })
+    }
     else if(req.url.match(/\/pessoas\/sexo=\w/)){
         axios.get('http://localhost:3000/pessoas')
         .then(function(resp){
@@ -86,6 +109,34 @@ http.createServer(function (req,res){
 
             res.writeHead(200,{'Content-Type': 'text/html; charset=utf-8'});
             res.end(mypages.genMainPage(pessoasSexo, d, `Lista de Pessoas do sexo ${sexo}`))
+        })
+        .catch(erro => {   // É UMA FUNÇÃO. A MESMA COISA DO QUE function(erro){}
+            console.log("Erro: " + erro)
+
+            res.writeHead(200,{'Content-Type': 'text/html; charset=utf-8'});
+            res.end("<p>Erro: " + erro + "</p>")
+        })
+    }
+    else if(req.url == '/pessoas/desportos'){
+        axios.get('http://localhost:3000/pessoas')
+        .then(function(resp){
+            var pessoas = resp.data            
+            var pessoasDesportos = {}
+            for(let i=0; i<pessoas.length; i++){
+                desportos = new Set(pessoas[i].desportos)
+                desportos = Array.from(desportos)
+                for(let j=0; j<desportos.length; j++){
+                    if(desportos[j] in pessoasDesportos){
+                        pessoasDesportos[desportos[j]] += 1
+                    }
+                    else{
+                        pessoasDesportos[desportos[j]] = 1
+                    }
+                }
+            }
+
+            res.writeHead(200,{'Content-Type': 'text/html; charset=utf-8'});
+            res.end(mypages.genDesportosPage(pessoasDesportos, d, `Lista de Desportos`))
         })
         .catch(erro => {   // É UMA FUNÇÃO. A MESMA COISA DO QUE function(erro){}
             console.log("Erro: " + erro)
@@ -141,6 +192,30 @@ http.createServer(function (req,res){
 
             res.writeHead(200,{'Content-Type': 'text/html; charset=utf-8'});
             res.end(mypages.genProfissaoPage(topProfissao, d, `Top ${Object.keys(topProfissao).length} de profissões na lista de pessoas`))
+        })
+        .catch(erro => {   // É UMA FUNÇÃO. A MESMA COISA DO QUE function(erro){}
+            console.log("Erro: " + erro)
+
+            res.writeHead(200,{'Content-Type': 'text/html; charset=utf-8'});
+            res.end("<p>Erro: " + erro + "</p>")
+        })
+    }
+    else if(req.url.match(/\/pessoas\/profissao=[a-zA-z]/)){
+        axios.get('http://localhost:3000/pessoas')
+        .then(function(resp){
+            var pessoas = resp.data            
+            var profissao = decodeURI(req.url.substring(19))
+            
+            var pessoasProfissao = []
+            for(let i=0; i<pessoas.length; i++){
+                if(pessoas[i].profissao.includes(profissao)){
+                    pessoasProfissao.push(pessoas[i])
+                }
+            }
+
+
+            res.writeHead(200,{'Content-Type': 'text/html; charset=utf-8'});
+            res.end(mypages.genMainPage(pessoasProfissao, d, `Lista de Pessoas que praticam a profissão de ${profissao}`))
         })
         .catch(erro => {   // É UMA FUNÇÃO. A MESMA COISA DO QUE function(erro){}
             console.log("Erro: " + erro)

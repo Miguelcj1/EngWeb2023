@@ -9,27 +9,6 @@ function upCase(string){
 
 
 exports.genHome = function(lista, data){
-
-    // var listaSexo = []
-    // for(let i=0; i<lista.length; i++){
-    //     if(!listaSexo.includes(lista[i].sexo)){
-    //         listaSexo.push(lista[i].sexo)
-    //     }
-    // }
-
-    var listaSexo = ['masculino', 'feminino', 'outro']
-
-    var listaDesportos = []
-    for(let i=0; i<lista.length; i++){
-        desportos = lista[i].desportos
-        for(let j=0; j<desportos.length; j++){
-            if(!listaDesportos.includes(desportos[j])){
-                listaDesportos.push(desportos[j])
-            }
-        }
-    }
-
-
     pagHTML = `
     <!DOCTYPE html>
     <html lang="en">
@@ -46,81 +25,38 @@ exports.genHome = function(lista, data){
 
                 <div class="w3-container">
                     <ul class="w3-ul w3-border w3-blue-grey">
-                        <li>
-                            Lista de pessoas
-                        </li>
-                        <ul class="w3-ul w3-light-grey">
-                            <li>
-                                <a href="http://localhost:7777/pessoas/"> 
-                                        Ordem por ID
-                                </a>
-                            </li>
-                            <li>
-                                <a href="http://localhost:7777/pessoas/asc"> 
-                                        Ordem Ascendente por Nome
-                                </a>
-                            </li>
-                            <li>
-                                <a href="http://localhost:7777/pessoas/desc"> 
-                                        Ordem Descendente por Nome
-                                </a>
-                            </li>
-                        </ul>
-    `
-    pagHTML += `
-        <li> Lista de Sexos </li>
-        <ul class="w3-ul w3-light-grey">
-    `
-    for(let i=0; i<listaSexo.length; i++){
-        pagHTML += `
-            <a href="http://localhost:7777/pessoas/sexo=${listaSexo[i]}">
-            <li>${listaSexo[i]}</li>
-            </a>
-        `
-    }
+                    <li> Lista de Pessoas 
+                        <a href="http://localhost:7777/pessoas/">
+                            Ordem por ID
+                        </a> | 
+                        <a href="http://localhost:7777/pessoas/asc">
+                            Ordem Ascendente
+                        </a> | 
+                        <a href="http://localhost:7777/pessoas/desc">
+                            Ordem Descendente
+                    </li>
 
-    pagHTML += `
-        </ul>
-    `
+                    <li><a href="http://localhost:7777/pessoas/sexo"> Distribuição por Sexos </a></li>
 
-    pagHTML += `
-        <li> Lista de Desportos </li>
-        <ul class="w3-ul w3-light-grey">
-    `
-    for(let i=0; i<listaDesportos.length; i++){
-        pagHTML += `
-            <a href="http://localhost:7777/pessoas/desportos=${listaDesportos[i]}">
-            <li>${listaDesportos[i]}</li>
-            </a>
-        `
-    }
+                    <li><a href="http://localhost:7777/pessoas/desportos"> Lista de Desportos </a></li>
 
-    pagHTML += `
-        </ul>
-    `
-
-    pagHTML += `
-    <li> Top de Profissões </li>
-    <ul class="w3-ul w3-light-grey">
-        <a href="http://localhost:7777/pessoas/profissao=5">
-        <li>Top 5</li>
-        </a>
-        <a href="http://localhost:7777/pessoas/profissao=10">
-        <li>Top 10</li>
-        </a>
-        <a href="http://localhost:7777/pessoas/profissao=20">
-        <li>Top 20</li>
-        </a>
-        <a href="http://localhost:7777/pessoas/profissao=100">
-        <li>Top 100</li>
-        </a>
-        <a href="http://localhost:7777/pessoas/profissao=1000">
-        <li>Todas as profissões</li>
-        </a>
-    </ul>
-    `
-
-    pagHTML += `
+                    <li> Top de Profissões 
+                        <a href="http://localhost:7777/pessoas/profissao=5">
+                            Top 5
+                        </a> | 
+                        <a href="http://localhost:7777/pessoas/profissao=10">
+                            Top 10
+                        </a> | 
+                        <a href="http://localhost:7777/pessoas/profissao=20">
+                            Top 20
+                        </a> | 
+                        <a href="http://localhost:7777/pessoas/profissao=100">
+                            Top 100
+                        </a> | 
+                        <a href="http://localhost:7777/pessoas/profissao=${lista.length}">
+                            Todas as profissões
+                        </a>
+                    </li>
                     </ul>
                 </div>
 
@@ -149,7 +85,8 @@ exports.genMainPage = function(lista, data, title){
         <body>
             <div class="w3-card-4">
                 <header class="w3-container w3-deep-purple">
-                    <h1>${title} (${lista.length}) <a href="http://localhost:7777"> [Voltar à página principal] </a></h1>
+                    <h1>${title} (${lista.length})</h1>
+                    <p><a href="http://localhost:7777"> [Voltar à página principal] </a></p>
                 </header>
 
                 <div class="w3-container">
@@ -213,7 +150,8 @@ exports.genPessoaPage = function(pessoa, data){
         <body>
             <div class="w3-card-4">
                 <header class="w3-container w3-deep-purple">
-                    <h1>${pessoa.nome} <a href="http://localhost:7777"> [Voltar à página principal] </a></h1>
+                    <h1>${pessoa.nome}</h1>
+                    <p><a href="http://localhost:7777"> [Voltar à página principal] </a></p>
                 </header>
 
                 <div class="w3-container">
@@ -289,7 +227,8 @@ exports.genProfissaoPage = function(dict, data, title){
         <body>
             <div class="w3-card-4">
                 <header class="w3-container w3-deep-purple">
-                    <h1>${title} <a href="http://localhost:7777"> [Voltar à página principal] </a></h1>
+                    <h1>${title}</h1>
+                    <p><a href="http://localhost:7777"> [Voltar à página principal] </a></p>
                 </header>
 
                 <div class="w3-container">
@@ -307,7 +246,7 @@ exports.genProfissaoPage = function(dict, data, title){
         <tr>
             <td>${i}</td>
             <td>${key}</td>
-            <td>${value}</td>
+            <td><a href="http://localhost:7777/pessoas/profissao=${key}">${value}</a></td>
         </tr>
         `
         i+=1
@@ -327,3 +266,100 @@ exports.genProfissaoPage = function(dict, data, title){
     return pagHTML
 }
 
+exports.genSexosPage = function(dict, data, title){
+    pagHTML = `
+    <!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <title>About people...</title>
+            <link rel="stylesheet" href="w3.css"/> 
+        </head>
+        <body>
+            <div class="w3-card-4">
+                <header class="w3-container w3-deep-purple">
+                    <h1>${title}</h1>
+                    <p><a href="http://localhost:7777"> [Voltar à página principal] </a></p>
+                </header>
+
+                <div class="w3-container">
+                <table class="w3-table-all w3-centered">
+                        <tr>
+                            <th>Sexo</th>
+                            <th>Número de pessoas</th>
+                        </tr>
+    `
+
+    Object.entries(dict).forEach(([key, value]) => {
+        pagHTML += `
+        <tr>
+            <td>${upCase(key)}</td>
+            <td><a href="http://localhost:7777/pessoas/sexo=${key}"/>${value}</a></td>
+        </tr>
+        `
+    });
+
+    pagHTML += `
+                    </table>
+                </div>
+
+                <footer class="w3-container w3-deep-purple">
+                    <h5>Generated by pessoas-server: ${data} <a href="http://localhost:7777"> [Voltar à página principal] </a></h5>
+                </footer>
+            </div> 
+        </body>
+    </html>
+    `
+    return pagHTML
+}
+
+exports.genDesportosPage = function(dict, data, title){
+    pagHTML = `
+    <!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <title>About people...</title>
+            <link rel="stylesheet" href="w3.css"/> 
+        </head>
+        <body>
+            <div class="w3-card-4">
+                <header class="w3-container w3-deep-purple">
+                    <h1>${title}</h1>
+                    <p><a href="http://localhost:7777"> [Voltar à página principal] </a></p>
+                </header>
+
+                <div class="w3-container">
+                <table class="w3-table-all w3-centered">
+                        <tr>
+                            <th>Desporto</th>
+                            <th>Número de pessoas</th>
+                        </tr>
+    `
+
+    dict = Object.fromEntries(
+        Object.entries(dict).sort(([,a], [,b]) => b - a)
+    );
+
+    Object.entries(dict).forEach(([key, value]) => {
+        pagHTML += `
+        <tr>
+            <td>${upCase(key)}</td>
+            <td><a href="http://localhost:7777/pessoas/desportos=${key}"/>${value}</a></td>
+        </tr>
+        `
+    });
+
+    pagHTML += `
+                    </table>
+                </div>
+
+                <footer class="w3-container w3-deep-purple">
+                    <h5>Generated by pessoas-server: ${data} <a href="http://localhost:7777"> [Voltar à página principal] </a></h5>
+                </footer>
+            </div> 
+        </body>
+    </html>
+    `
+    return pagHTML
+}
