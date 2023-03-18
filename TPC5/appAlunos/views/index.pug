@@ -1,0 +1,29 @@
+extends layout
+
+block content
+  header.w3-container.w3-indigo
+    h1= title
+  .w3-container
+    // Formulário de criação de conta
+    form.w3-container.w3-padding(method="POST")
+      fieldset.w3-light-grey
+        legend Novo utilizador
+        label ID
+        input.w3-input.w3-round-large.w3-grey(type="text" name="id")
+        label Nome
+        input.w3-input.w3-round-large.w3-grey(type="text" name="nome")
+      fieldset
+    button.w3-btn.w3-round.w3-indigo(type=submit style="float:right") Registar utilizador
+      
+    // Formulário de criação de task
+    form.w3-container.w3-padding(method="POST")
+      fieldset.w3-light-grey
+        legend Nova tarefa
+        label ID
+        input.w3-input.w3-round-large.w3-grey(type="text" name="id")
+        label User
+        input.w3-input.w3-round-large.w3-grey(type="text" name="user")
+        label Tarefa
+        input.w3-input.w3-round-large.w3-grey(type="text" name="task ")
+      fieldset
+    button.w3-btn.w3-round.w3-indigo(type=submit style="float:right") Registar tarefa
