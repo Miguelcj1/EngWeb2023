@@ -1,49 +1,39 @@
 {
   "tasks": [
     {
-      "id": "t1",
-      "user": "u3",
-      "task": "undefined"
-    },
-    {
       "id": "t2",
       "datelimit": "2023-12-31",
       "user": "u2",
       "descricao": "Fazer o TPC4 de EW",
-      "status": 0
+      "status": "0"
     },
     {
       "id": "t3",
       "datelimit": "2023-12-31",
       "user": "u3",
       "descricao": "Fazer o TPC4 de EW",
-      "status": 0
+      "status": "0"
     },
     {
       "id": "t4",
       "datelimit": "2023-12-31",
       "user": "u1",
       "descricao": "Fazer o TPC3 de EW",
-      "status": 1
+      "status": "1"
     },
     {
       "id": "t5",
       "datelimit": "2023-12-31",
       "user": "u2",
       "descricao": "Fazer o TPC3 de EW",
-      "status": 1
+      "status": "1"
     },
     {
       "id": "t6",
       "datelimit": "2023-12-31",
       "user": "u3",
       "descricao": "Fazer o TPC3 de EW",
-      "status": 1
-    },
-    {
-      "id": "t7",
-      "user": "Miguel Pinto",
-      "task": "Fazer cenas"
+      "status": "1"
     }
   ],
   "users": [

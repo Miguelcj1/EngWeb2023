@@ -3,27 +3,62 @@ extends layout
 block content
   header.w3-container.w3-indigo
     h1= title
-  .w3-container
+  .w3-cell-row
     // Formulário de criação de conta
-    form.w3-container.w3-padding(method="POST")
-      fieldset.w3-light-grey
-        legend Novo utilizador
-        label ID
-        input.w3-input.w3-round-large.w3-grey(type="text" name="id")
-        label Nome
-        input.w3-input.w3-round-large.w3-grey(type="text" name="nome")
-      fieldset
-    button.w3-btn.w3-round.w3-indigo(type=submit style="float:right") Registar utilizador
+    .w3-cell(style="width:50%")
+      form.w3-container.w3-padding(method="POST" action="/")
+        fieldset.w3-light-grey
+          legend Novo utilizador
+          label ID
+          input.w3-input.w3-round-large.w3-grey(type="text" name="id")
+          label Nome
+          input.w3-input.w3-round-large.w3-grey(type="text" name="nome")
+        fieldset
+      button.w3-btn.w3-round.w3-indigo(type=submit style="float:right") Registar utilizador
       
     // Formulário de criação de task
-    form.w3-container.w3-padding(method="POST")
-      fieldset.w3-light-grey
-        legend Nova tarefa
-        label ID
-        input.w3-input.w3-round-large.w3-grey(type="text" name="id")
-        label User
-        input.w3-input.w3-round-large.w3-grey(type="text" name="user")
-        label Tarefa
-        input.w3-input.w3-round-large.w3-grey(type="text" name="task ")
-      fieldset
-    button.w3-btn.w3-round.w3-indigo(type=submit style="float:right") Registar tarefa
+    .w3-cell(style="width:50%")
+      form.w3-container.w3-padding(method="POST" action="/tasks")
+        fieldset.w3-light-grey
+          legend Nova tarefa
+          label ID
+          input.w3-input.w3-round-large.w3-grey(type="text" name="id")
+          label User
+          input.w3-input.w3-round-large.w3-grey(type="text" name="user")
+          label Tarefa
+          input.w3-input.w3-round-large.w3-grey(type="text" name="task")
+        fieldset
+      button.w3-btn.w3-round.w3-indigo(type=submit style="float:right") Registar tarefa
+    
+  .w3-cell-row
+    .w3-cell(style="width:45%")
+      each t in tasks 
+        if t.status == "0" 
+          form.w3-container.w3-padding(method="POST" action="/editTask/"+t.id)
+            fieldset.w3-light-grey
+              legend Tarefas
+              label ID
+              input.w3-input.w3-round-large.w3-grey(type="text" name="id", value=t.id, readonly)
+              label User
+              input.w3-input.w3-round-large.w3-grey(type="text" name="user", value=t.user, readonly)
+              label Tarefa
+              input.w3-input.w3-round-large.w3-grey(type="text" name="task", value=t.descricao, readonly)
+              label Status 
+              input.w3-check(type="checkbox" name="status" value=1 onChange="this.form.submit()")
+            button.w3-btn.w3-round.w3-indigo(type=submit style="float:right") Confirmar alteração
+
+    .w3-cell(style="width:2%")
+
+    .w3-cell(style="width:45%")
+        table.w3-table.w3-striped.w3-bordered.w3-centered
+            caption.w3-large.w3-grey Done
+              tr.w3-indigo
+                th Id
+                th User
+                th Task
+                each t in tasks
+                  if t.status == "1"
+                    tr
+                      td #{t.id}
+                      td #{t.user}
+                      td #{t.descricao}

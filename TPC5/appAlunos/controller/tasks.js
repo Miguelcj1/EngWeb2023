@@ -11,8 +11,8 @@ module.exports.taskList = () => {
             })
 }
 
-module.exports.getAluno = id => {
-    return axios.get('http://localhost:3000/alunos/' + id)
+module.exports.getUsers = () => {
+    return axios.get('http://localhost:3000/users')
             .then(resposta => {
                 return resposta.data
             })
@@ -21,8 +21,8 @@ module.exports.getAluno = id => {
             })
 }
 
-module.exports.addAluno = a => {
-    return axios.post('http://localhost:3000/alunos', a)
+module.exports.addTask = t => {
+    return axios.post('http://localhost:3000/tasks', t)
             .then(resposta => {
                 return resposta.data
             })
@@ -31,8 +31,8 @@ module.exports.addAluno = a => {
             })
 }
 
-module.exports.editAluno = a => {
-    return axios.put('http://localhost:3000/alunos/' + a.id, a)
+module.exports.addUser = u => {
+    return axios.post('http://localhost:3000/users', u)
             .then(resposta => {
                 return resposta.data
             })
@@ -41,8 +41,8 @@ module.exports.editAluno = a => {
             })
 }
 
-module.exports.deleteAluno = id => {
-    return axios.delete('http://localhost:3000/alunos/' + id)
+module.exports.editTask = t => {
+    return axios.put('http://localhost:3000/task/' + t.id, t)
             .then(resposta => {
                 return resposta.data
             })
