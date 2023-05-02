@@ -1,0 +1,30 @@
+1- db.exames.count()                         
+    R: 300
+2- db.exames.find({resultado: true}).count() 
+    R: 138
+3- db.exames.aggregate([{$group:{_id:"$género",count:{$sum:1}}}])
+    R: M:158 | F:142
+4- db.exames.aggregate([{$group:{_id:"$modalidade",count:{$sum:1}}}])
+    R:[
+  { _id: 'Ciclismo', count: 18 },
+  { _id: 'Patinagem', count: 18 },
+  { _id: 'Ténis', count: 10 },
+  { _id: 'Dança', count: 17 },
+  { _id: 'SUP', count: 16 },
+  { _id: 'Triatlo', count: 23 },
+  { _id: 'Parapente', count: 19 },
+  { _id: 'Equitação', count: 13 },
+  { _id: 'Esgrima', count: 20 },
+  { _id: 'Futebol', count: 24 },
+  { _id: 'BTT', count: 18 },
+  { _id: 'Andebol', count: 18 },
+  { _id: 'Karaté', count: 15 },
+  { _id: 'Orientação', count: 19 },
+  { _id: 'Atletismo', count: 18 },
+  { _id: 'Badminton', count: 21 },
+  { _id: 'Basquetebol', count: 13 }
+]
+5- db.exames.aggregate([{$match: {"clube": "GDGoma", "resultado": true}}, {$count: "count"}])  (Se quiser todos retire o ("resultado": true))
+    R: [ { count: 10 } ]
+6- db.exames.aggregate([{$match: {"género": "F", "modalidade": "Triatlo", "resultado": true}}, {$count: "count"}]) (Se quiser todos retire o ("resultado": true))
+    R: [ { count: 5 } ]
